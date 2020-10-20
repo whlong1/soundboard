@@ -3,6 +3,17 @@
 console.log('test')
 
 let searchBar = document.querySelector(".search-bar")
+let artistName = document.querySelector(".artistName")
+let locationResult = document.querySelector(".loc")
+
+
+
+const quickView = (data) => {
+    // console.log(data.artists[0].intFormedYear)
+    artistName.innerHTML = data.artists[0].strArtist
+    locationResult.innerHTML = data.artists[0].strCountry
+}
+
 
 
 const goFind = (inputText) => {
@@ -13,7 +24,7 @@ const goFind = (inputText) => {
     .then(response =>{
         console.log(response)
         console.log(response.data.artists[0].strCountry)
-        //test
+        quickView(response.data)
         return response.data
     })
     .catch(error => console.log('Error:', error))
