@@ -5,7 +5,6 @@ console.log('test')
 let searchBar = document.querySelector(".search-bar")
 
 
-
 const goFind = (inputText) => {
     console.log('HELLO')
     // axios.get(ARTIST_RESULTS)
@@ -13,7 +12,8 @@ const goFind = (inputText) => {
     // console.log(ARTIST_RESULTS)
     .then(response =>{
         console.log(response)
-        console.log(response.data.artists)
+        console.log(response.data.artists[0].strCountry)
+        //test
         return response.data
     })
     .catch(error => console.log('Error:', error))
