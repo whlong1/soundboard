@@ -3,15 +3,23 @@
 console.log('test')
 
 let searchBar = document.querySelector(".search-bar")
+//Quickview Data
 let artistName = document.querySelector(".artistName")
 let locationResult = document.querySelector(".loc")
-
+let yearFormed = document.querySelector(".formedResult")
+let photoResult = document.querySelector(".photoResult")
+let logoResult = document.querySelector(".logoResult")
+let labelResult = document.querySelector(".label")
 
 
 const quickView = (data) => {
     // console.log(data.artists[0].intFormedYear)
     artistName.innerHTML = data.artists[0].strArtist
     locationResult.innerHTML = data.artists[0].strCountry
+    yearFormed.innerHTML = data.artists[0].intFormedYear
+    labelResult.innerHTML = data.artists[0].strLabel
+    photoResult.src = data.artists[0].strArtistThumb
+    logoResult.src = data.artists[0].strArtistLogo
 }
 
 
