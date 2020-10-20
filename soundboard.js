@@ -19,12 +19,11 @@ const goFind = (inputText) => {
     .catch(error => console.log('Error:', error))
 }
 
-searchBar.addEventListener('keyup', function(userSearch) {
-    if (userSearch.keyCode == 13) {
-        //enter key
-        let inputText= userSearch.target.value
+searchBar.addEventListener('keydown', function(searchEvent) {
+    if (searchEvent.keyCode == 13) {
+        searchEvent.preventDefault()
+        let inputText= searchEvent.target.value
         goFind(inputText)
-
     }
   })
 
