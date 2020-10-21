@@ -2,7 +2,7 @@
 
 ## **Project Description**
 
-**soundboard** is an online repository of music information. **soundboard** utilizes the **TheAudioDB API** to organize information on recording artists in a friendly user interface. 
+**soundboard** is an online repository of music information. **soundboard** utilizes the **TheAudioDB API** to organize information on recording artists in a user-friendly interface. 
 
 ## **User Experience**
 
