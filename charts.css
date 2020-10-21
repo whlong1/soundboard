@@ -1,0 +1,17 @@
+body{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-family: 'canada-type-gibson', sans-serif;
+    text-align: center;
+    color: black;
+}
+
+
+.chartBox{
+    background-color: red;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+}
+

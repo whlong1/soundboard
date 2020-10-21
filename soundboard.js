@@ -37,6 +37,8 @@ const quickView = (data) => {
 
 }
 
+
+
 //toggle class tied to image in quickview
 //in css make class hidden
 //toggle to not hidden with event handler
