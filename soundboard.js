@@ -1,27 +1,54 @@
 // https://theaudiodb.com/api/v1/json/1/search.php?s=coldplay
 
-console.log('test')
-
 let searchBar = document.querySelector(".search-bar")
+
 //Quickview Data
-let artistName = document.querySelector(".artistName")
-let locationResult = document.querySelector(".loc")
-let yearFormed = document.querySelector(".formedResult")
-let photoResult = document.querySelector(".photoResult")
-let logoResult = document.querySelector(".logoResult")
-let labelResult = document.querySelector(".label")
+let profilePicture = document.querySelector("#artistPhoto")
+let artistName = document.querySelector("#artistName")
+let locationResult = document.querySelector("#location")
+let startDate = document.querySelector("#began")
+// let endDate = document.querySelector("#end")
+let recordLabel = document.querySelector("#label")
+let musicGenre = document.querySelector("#genre")
+let mood = document.querySelector("#mood")
+let artistBio = document.querySelector("#bioText")
+
+
+// let web = document.querySelector("#web")
 
 
 const quickView = (data) => {
-    // console.log(data.artists[0].intFormedYear)
+    profilePicture.src = data.artists[0].strArtistThumb
     artistName.innerHTML = data.artists[0].strArtist
     locationResult.innerHTML = data.artists[0].strCountry
-    yearFormed.innerHTML = data.artists[0].intFormedYear
-    labelResult.innerHTML = data.artists[0].strLabel
-    photoResult.src = data.artists[0].strArtistThumb
-    logoResult.src = data.artists[0].strArtistLogo
+    startDate.innerHTML = data.artists[0].intFormedYear
+    // endDate.innerHTML = data.artists[0].intDiedYear
+    recordLabel.innerHTML = data.artists[0].strLabel
+    musicGenre.innerHTML = data.artists[0].strGenre
+    mood.innerHTML = data.artists[0].strMood
+
+    // web.innerHTML = data.artists[0].strWebsite
+
+
+    artistBio.innerHTML = data.artists[0].strBiographyEN
+
 }
 
+
+
+
+// strWebsite: "thebeatles.com",
+// strFacebook: "www.facebook.com/thebeatles",
+// strTwitter: "twitter.com/thebeatles",
+
+
+//toggle class tied to image in quickview
+//in css make class hidden
+//toggle to not hidden with event handler
+
+//search
+//on click expand
+//on click width= blank
 
 
 const goFind = (inputText) => {

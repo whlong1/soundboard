@@ -19,34 +19,52 @@
         </nav>
     </header>
     <main>
-        <div>
-            <h2>welcome</h2>
-        </div>
-        <p>Lorem Ipsum</p>
         <div class="container">
-            <h3> Find an Artist</h3>
+            <h3 id="findAnArtist">Find an Artist</h3>
             <form class="search-form">
                 <input placeholder="Search" type="search" class="search-bar" value="">
                 <div class="search-icon"><img src= "https://www.flaticon.com/svg/static/icons/svg/709/709592.svg"/></div>
             </form>
         </div>
-        <div class="quickview">
-            <h4 class="artistName"><span class="name"> </span></h4>
-            <img class="photoResult" src="" alt="photo">
-            <img class="logoResult" src="" alt="logo">
-            <div class="links">
-                <h5 class="bio">bio</h5>
-                <h5 class="discography">discography</h5>
-                <h5 class="socialMedia">socialMedia:</h5>
+
+
+        <div class="quickView">
+
+
+            <div class="boxOne">
+                <div class=rowOne>
+                    <div class="quadrantA">
+                        <img id="artistPhoto" src="" alt="photo">
+                    </div>
+                    <div class="quadrantB">
+                        <h3><span id="artistName"></span></h3>
+                        <ul class="artistDetails">
+                            <li>Location: <span class="adList" id="location"> </span></li>
+                            <li>Formed in: <span class="adList" id="began"> </span></li>
+                            <!-- <li>Disbanded in: <span class="adList" id="end"> </span></li> -->
+                            <li>Label: <span class="adList" id="label"> </span></li>
+                            <li>Genre: <span class="adList" id="genre"> </span></li>
+                            <li>Mood: <span class="adList" id="mood"> </span></li>
+                            <li>View Profile <span class="adList" id="profile"> </span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class=rowTwo>
+                    <p id="bioText">&nbsp;...</p>
+                </div>
             </div>
-            <div class="overview">
-                <h5 class="location">Location: <span class="loc"> </span></h5>
-                <h5 class="formed">Formed in: <span class="formedResult"> </span></h5>
-                <h5 class="genre">genre:<span class="FILL"> </span></h5>
-                <h5 class="labelResult">Label: <span class="label"> </span></h5>
-                <h5 class="mood">mood:<span class="FILL"> </span></h5>
-            </div>
+
+
+            <div class="boxTwo">
+                <div class="rowC"></div>
+                <div class="rowD">
+                    <ul class="socialLinks"></ul>
+                </div>
+
         </div>
+
+
+
     </main>
     <footer>
         <p class="footer-text">contact</p>

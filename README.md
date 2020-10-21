@@ -6,8 +6,6 @@
 
 ## **User Experience**
 
-#### User Experience Overview
-
 Upon entering the site, the user will be greeted with a welcome message and a search bar for finding artists. Once an artist has been selected, a quickview container will populate with information on the artist. 
 
 #### User Story One
