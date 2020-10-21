@@ -14,7 +14,9 @@ let mood = document.querySelector("#mood")
 let artistBio = document.querySelector("#bioText")
 
 
-// let web = document.querySelector("#web")
+let web = document.querySelector("#web")
+let fb = document.querySelector("#fb")
+let twitter = document.querySelector("#twitter")
 
 
 const quickView = (data) => {
@@ -27,20 +29,13 @@ const quickView = (data) => {
     musicGenre.innerHTML = data.artists[0].strGenre
     mood.innerHTML = data.artists[0].strMood
 
-    // web.innerHTML = data.artists[0].strWebsite
-
-
     artistBio.innerHTML = data.artists[0].strBiographyEN
 
+    web.innerHTML = data.artists[0].strWebsite
+    fb.innerHTML = data.artists[0].strFacebook
+    twitter.innerHTML = data.artists[0].strTwitter
+
 }
-
-
-
-
-// strWebsite: "thebeatles.com",
-// strFacebook: "www.facebook.com/thebeatles",
-// strTwitter: "twitter.com/thebeatles",
-
 
 //toggle class tied to image in quickview
 //in css make class hidden
@@ -53,9 +48,7 @@ const quickView = (data) => {
 
 const goFind = (inputText) => {
     console.log('HELLO')
-    // axios.get(ARTIST_RESULTS)
     axios.get(`https://theaudiodb.com/api/v1/json/523532/search.php?s=${inputText}`)
-    // console.log(ARTIST_RESULTS)
     .then(response =>{
         console.log(response)
         console.log(response.data.artists[0].strCountry)

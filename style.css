@@ -110,10 +110,8 @@ h3{
     grid-template-columns: 2;
     grid-template-areas:
         "boxOne boxTwo";
-
     width: 770px;
     height: 380px;
-
     background-color: white;
     border-style: solid;
     border-width: 1px;
@@ -129,9 +127,6 @@ h3{
     width: 385px;
     height: 382px;
     margin-right: 10px;
-    /* padding: 10px; */
-    /* padding: 20px; */
-    /* padding: 20px; */
     grid-template-areas:
         "rowOne rowTwo";
 }
@@ -150,8 +145,6 @@ h3{
     display: grid;
     align-items: left;
     text-align: left;
-    /* margin-left: auto;
-    margin-right: auto; */
     width: 170px;
     height: 170px;
     border-style: solid;
@@ -177,7 +170,6 @@ h3{
     margin-right: auto;
     width: 190px;
     height: 170px;
-    /* left: 0; */
 }
 
 h3{
@@ -220,24 +212,9 @@ h3{
 }
 
 
-.socialLinks{
-    list-style-type: none;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 .rowTwo{
-    grid-area: rowOne;
+    grid-area: rowTwo;
     height: 180px;
     margin: 0px;
 
@@ -254,8 +231,6 @@ h3{
     text-align: justify;
     text-justify: inter-word;
     justify-content: contain;
-
-
     text-overflow: ellipsis;
     white-space: wrap;
     overflow: hidden;
@@ -270,86 +245,97 @@ h3{
     width: 385px;
     height: 382px;
     margin-left: 10px;
-    /* border: 5px solid red; */
-    /* padding: 20px; */
-    /* padding: 20px; */
-    /* padding: 20px; */
+    grid-template-areas:
+        "rowThree rowFour";
 }
 
 
-
-
-/* #loc{
-    font-family: 'canada-type-gibson', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-.overview{
-    display: block;
+.rowThree{
+    grid-area: rowThree;
     position: absolute;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-column-gap: 4px; */
+    margin: 0 auto;
+    padding: 0px;
+    width: 385px;
+    height: 250px;
+}
+
+.discogNav{
     font-family: 'canada-type-gibson', sans-serif;
     font-style: normal;
-    font-weight: 400;
-    text-align: left;
-    margin: 30px;
-    left: 50%;
-
+    font-size: 12px;
+    font-weight: 300;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
-.artistName{
-    margin-top: 10px;
-    margin-left: 30px;
-}
-
-.links{
-    display: inline;
-    margin-top: 250px;
-    text-align: left;
+.albumBox{
     width: 100px;
     height: 100px;
-    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color:#d3d3d3;
+    margin: 4px;
+
 }
 
-.photoResult{
-    margin-top: 300px;
-    display: block;
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    margin: 30px;
+.rowFour{
+    grid-area: rowFour;
+    height: 100px;
+    margin-top: 250px;
+    /* border-style: solid;
+    border-width: 1px;
+    border-color:#d3d3d3; */
+    
 }
 
-.logoResult{
-    display: block;
-    position: absolute;
-    width: 150px;
-    margin: 30px;
-    margin-left: 60%;
+#extLinks{
+    font-family: 'canada-type-gibson', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 300;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
 }
 
-.loc{
+.socialLinks{
+    padding: 0px;
+    list-style-type: none;
+    display: flex;
+    width: 100%;
+    list-style: none;   
+    justify-content: center;
     font-family: 'canada-type-gibson', sans-serif;
     font-style: normal;
     font-weight: 400;
-} */
+    text-align: center;
+    font-size: 10px;
+}
+
+#web{
+    margin: 5px;
+}
+
+#fb{
+    margin: 5px;
+}
+
+#twitter{
+    margin: 5px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 footer{
