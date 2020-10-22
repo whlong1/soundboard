@@ -74,9 +74,9 @@ const getAlbums = async (inputText) => {
         const response = await axios.get(`https://theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${inputText}`)
         let discogs = response.data.album
 
-        // discogs.sort((a, b) => {
-        //     return a.intYearReleased - b.intYearReleased})
-        // discogs.sort(compareAlbums)
+        discogs.sort((a, b) => {
+            return a.intYearReleased - b.intYearReleased})
+        discogs.sort(compareAlbums)
 
         console.log(discogs)
         populateAlbums (discogs)
@@ -85,34 +85,39 @@ const getAlbums = async (inputText) => {
     }
 }
 
-const makeDiscogTitle = () => {
-    let discogTitle = document.createElement('p')
-    discogTitle.classList.add("discogTitle")
-    discogTitle.innerText = "Discography"
-    boxTwo.appendChild(discogTitle)
-}
+
+
 
 let boxTwo = document.querySelector('.boxTwo')
 
 const populateAlbums = (discogs) => {
-    boxTwo.innerHTML= " "
-    makeDiscogTitle()
+    boxTwo.innerHTML= ""
+
+    let discogTitle = document.createElement('p')
+    discogTitle.classList.add("discogTitle")
+    discogTitle.innerText = "Discography"
+    let coverDiv = document.createElement('div')
+    coverDiv.classList.add("coverDiv")
+    boxTwo.appendChild(discogTitle)
+    boxTwo.appendChild(coverDiv)
+
     for (let i = 0; i< discogs.length; i++) {
         let coverArt = document.createElement('img')
         // let discogTitle = document.createElement('h3')
         coverArt.classList.add("pic")
-        coverArt.id = discogs[i]
+        coverArt.id = discogs[i].idAlbum
         // discogTitle.classList.add("discogTitle")
         // discogTitle.innerText = "Discography"
 
         // coverArt.src = discogs[i].strAlbumThumb
 
         if (discogs[i].strAlbumThumb === null || discogs[i].strAlbumThumb === "") {
-            return
+            continue
         } else {
             coverArt.src = discogs[i].strAlbumThumb
         }
-        boxTwo.appendChild(coverArt)
+        // coverArt.src = discogs[i].strAlbumThumb
+        coverDiv.appendChild(coverArt)
         // boxTwo.appendChild(discogTitle)
     }
 }
