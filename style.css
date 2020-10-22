@@ -10,7 +10,7 @@ body{
     /* grid-template-columns: 2; */
     justify-items: center;
     align-items: center;
-    
+    margin: 0;
     font-family: 'canada-type-gibson', sans-serif;
     text-align: center;
     color: black;
@@ -250,6 +250,12 @@ h3{
 }
 
 
+.pic{
+    width: 100px;
+    height: 100px;
+}
+
+
 .rowThree{
     grid-area: rowThree;
     position: absolute;
@@ -349,9 +355,12 @@ footer{
     padding: none;
 }
 
-.footer-text{
+/* .footer-text{
     color: white;
     font-family: 'canada-type-gibson', sans-serif;
     font-style: normal;
     font-weight: 400;
-}
+    width: 50px !important;
+    margin-left: 0 !important;
+    margin-right: 0;
+} */

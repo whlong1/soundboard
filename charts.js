@@ -29,7 +29,6 @@ const getChart = async () => {
             boxGen.appendChild(albumArt)
             boxGen.appendChild(artistName)
             chartBox.appendChild(boxGen)
-            
 
         }
         console.log(response.data.trending)
@@ -41,5 +40,4 @@ const getChart = async () => {
 
 
 window.onload = getChart
-
 
