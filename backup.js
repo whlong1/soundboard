@@ -6,7 +6,7 @@ let boxOne = document.querySelector(".boxOne")
 let boxTwo = document.querySelector('.boxTwo')
 
 
-
+// let selectAlbum = discogs[i].strAlbum
 
 
 
@@ -84,7 +84,7 @@ const getAlbums = async (inputText) => {
             return a.intYearReleased - b.intYearReleased})
         discogs.sort(compareAlbums)
 
-        // console.log(discogs)
+        console.log(discogs)
         populateAlbums (discogs)
     } catch (error) {
         console.log(error)
@@ -121,19 +121,18 @@ const populateAlbums = (discogs) => {
     }
 }
 
-
 //=============================================================================
 // SINGLE ALBUM DISPLAY
 
 const getOneAlbum = async (selectAlbum) => {
     try {
         // const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=nevermind`)
-        const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=${selectAlbum}`)
+        // const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=${selectAlbum}`)
         let oneAlbum = response.data.album[0]
         console.log(selectAlbum)
+        console.log
         console.log(oneAlbum)
         populateSingleAlbum(oneAlbum)
-        console.log('TESTING')
     } catch (error) {
         console.log(error)
     }
@@ -193,15 +192,22 @@ searchBar.addEventListener('keydown', function(searchEvent) {
     }
   })
 
-//   let selectAlbum = discogs[i].strAlbum
 
 
 
-// pic.addEventListener('click', (event) => {
-//     selectAlbum = event.target.id
-//     getOneAlbum(selectAlbum)
-// })
 
+  boxTwo.addEventListener('click', (event) => {
+      let selectAlbum = 'nevermind'
+    
+      getOneAlbum(selectAlbum)
+  })
+
+
+
+
+
+
+  
 // window.onload = function(){
 //     getOneAlbum()
 // }
@@ -209,37 +215,9 @@ searchBar.addEventListener('keydown', function(searchEvent) {
 
 let allAlbums = document.querySelectorAll('.pic')
 
-
-allAlbums.addEventListener('click', (event) => {
-    selectAlbum = event.target.id
-    // coverDiv.style.visibility = 'hidden'
-    console.log(selectAlbum)
-    getOneAlbum(selectAlbum)
+allAlbums.forEach((pic) => {
+    pic.addEventListener('click', (event) => {
+        selectAlbum = event.target.id
+        coverDiv.style.visibility = 'hidden'
+    })
 })
-
-
-// const banana = document.querySelectorAll(".pic");
-//  for (let i = 0; i < banana.length; i++) {
-//      banana[i].addEventListener("click", function() {
-//        // do something...
-//      });
-//  }
-
-
-// allAlbums.forEach((pic) => {
-//     pic.addEventListener('click', (event) => {
-//         selectAlbum = event.target.id
-//         // coverDiv.style.visibility = 'hidden'
-//         console.log(selectAlbum)
-//         getOneAlbum(selectAlbum)
-//     })
-// })
-
-
-// coverArt.forEach((pic) => {
-//     pic.addEventListener('click', (event) => {
-//         selectAlbum = event.target.id
-//         getOneAlbum(selectAlbum)
-//     })
-// }
-// )
