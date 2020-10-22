@@ -136,10 +136,11 @@ const getOneAlbum = async (selectAlbum) => {
 const populateSingleAlbum = (oneAlbum) => {
     //Clear boxTwo of full discography to free space for single album view.
     boxTwo.innerHTML= ""
-
+    
     //Create container for information on one album
     let singleAlbumDisplay = document.createElement('div')
     singleAlbumDisplay.classList.add("singleAlbumDisplay")
+    singleAlbumDisplay.style.visibility = "visible"
 
     //Album information
     let albumName = document.createElement('h3')
@@ -149,23 +150,31 @@ const populateSingleAlbum = (oneAlbum) => {
     let albumSales = document.createElement('p')
     let albumDescription = document.createElement('p')
 
+    albumName.classList.add("albumTitle")
+    singleAlbumArt.classList.add("topPhoto")
+    albumDescription.id = 'summary'
+
+    
+    
+
     albumName.innerText = oneAlbum.strAlbum
     singleAlbumArt.src = oneAlbum.strAlbumThumb
     yearReleased.innerText = oneAlbum.intYearReleased
     theLabel.innerText = oneAlbum.strLabel
-    albumSales = oneAlbum.intSales
-    albumDescription = oneAlbum.strDescriptionEN
+    albumSales.innerText = oneAlbum.intSales
+    albumDescription.innerText = oneAlbum.strDescriptionEN
 
 
     singleAlbumDisplay.appendChild(albumName)
     singleAlbumDisplay.appendChild(singleAlbumArt)
     singleAlbumDisplay.appendChild(yearReleased)
     singleAlbumDisplay.appendChild(theLabel)
-    // singleAlbumDisplay.appendChild(albumSales)
-    // singleAlbumDisplay.appendChild(albumDescription)
+    singleAlbumDisplay.appendChild(albumSales)
+    singleAlbumDisplay.appendChild(albumDescription)
     boxTwo.appendChild(singleAlbumDisplay)
     console.log(oneAlbum)
     console.log(albumName)
+    console.log(albumDescription)
 
 }
 

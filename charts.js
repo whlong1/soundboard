@@ -11,12 +11,12 @@ const getChart = async () => {
         for (let i = 0; i< trending.length; i++) {
 
             let boxGen = document.createElement('div')
-            boxGen.classList.add("frame");
+            boxGen.classList.add("frame")
 
             let albumTitle = document.createElement('h3')
             let artistName = document.createElement('p')
             let albumArt = document.createElement('img')
-            albumArt.classList.add("albumBox");
+            albumArt.classList.add("albumBox")
 
             albumTitle.innerText = trending[i].strAlbum
             artistName.innerText = trending[i].strArtist
