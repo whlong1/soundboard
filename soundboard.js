@@ -4,12 +4,14 @@ let searchBar = document.querySelector(".search-bar")
 
 let boxOne = document.querySelector(".boxOne")
 let boxTwo = document.querySelector('.boxTwo')
-let singleAlbumDisplay = document.querySelector(".singleAlbumDisplay")
+
+
+// let selectAlbum = 'nevermind'
+
 
 //QUICKVIEW DATA
 
 //Leftside-Artist Details
-
 let profilePicture = document.querySelector("#artistPhoto")
 let artistName = document.querySelector("#artistName")
 let locationResult = document.querySelector("#location")
@@ -20,17 +22,14 @@ let mood = document.querySelector("#mood")
 let artistBio = document.querySelector("#bioText")
 
 //Rightside-Discography
-
 let albumArtDiv = document.querySelector(".albumBox")
 
 //Bottom-Social Media 
-
 let web = document.querySelector("#web")
 let fb = document.querySelector("#fb")
 let twitter = document.querySelector("#twitter")
 
 //Assigns data to variables
-
 const quickView = (data) => {
     //default visibility of boxOne in css set as hidden
     boxOne.style.visibility = "visible"
@@ -50,7 +49,6 @@ const quickView = (data) => {
 }
 
 //Find data on an artist
-
 const goFind = (inputText) => {
     axios.get(`https://theaudiodb.com/api/v1/json/523532/search.php?s=${inputText}`)
     .then(response =>{
@@ -61,7 +59,6 @@ const goFind = (inputText) => {
 }
 
 //Compare release dates of albums
-
 const compareAlbums = (a, b) => {
     const aYear = parseInt(a.intYearReleased)
     const bYear = parseInt(b.intYearReleased)
@@ -75,14 +72,12 @@ const compareAlbums = (a, b) => {
 }
 
 //Get discography from selected artist
-
 const getAlbums = async (inputText) => {
     try {
         const response = await axios.get(`https://theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${inputText}`)
         let discogs = response.data.album
 
         //Sort albums chronologically
-
         discogs.sort((a, b) => {
             return a.intYearReleased - b.intYearReleased})
         discogs.sort(compareAlbums)
@@ -95,13 +90,11 @@ const getAlbums = async (inputText) => {
 }
 
 //Display returned album art
-
 const populateAlbums = (discogs) => {
     //clear container each time to prevent overlap
     boxTwo.innerHTML= ""
 
     //Creates Discography section title & album art images
-
     let discogTitle = document.createElement('p')
     discogTitle.classList.add("discogTitle")
     discogTitle.innerText = "Discography"
@@ -111,14 +104,12 @@ const populateAlbums = (discogs) => {
     boxTwo.appendChild(coverDiv)
 
     //Creates an image for every album in discogs
-
     for (let i = 0; i< discogs.length; i++) {
         let coverArt = document.createElement('img')
         coverArt.classList.add("pic")
         coverArt.id = discogs[i].strAlbum
 
         //Blocks data with no album art (bootlegs etc)
-
         if (discogs[i].strAlbumThumb === null || discogs[i].strAlbumThumb === "") {
             continue
         } else {
@@ -128,8 +119,57 @@ const populateAlbums = (discogs) => {
     }
 }
 
-//Listen for enter key on search bar--> find the artist and get their albums
+//=============================================================================
+// SINGLE ALBUM DISPLAY
 
+const getOneAlbum = async (selectAlbum) => {
+    try {
+        const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=nevermind`)
+        let oneAlbum = response.data.album[0]
+        console.log(oneAlbum)
+        populateSingleAlbum(oneAlbum)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const populateSingleAlbum = (oneAlbum) => {
+    //Clear boxTwo of full discography to free space for single album view.
+    boxTwo.innerHTML= ""
+
+    //Create container for information on one album
+    let singleAlbumDisplay = document.createElement('div')
+    singleAlbumDisplay.classList.add("singleAlbumDisplay")
+
+    //Album information
+    let albumName = document.createElement('h3')
+    let singleAlbumArt = document.createElement('img')
+    let yearReleased = document.createElement('p')
+    let theLabel = document.createElement('p')
+    let albumSales = document.createElement('p')
+    let albumDescription = document.createElement('p')
+
+    albumName.innerText = oneAlbum.strAlbum
+    singleAlbumArt.src = oneAlbum.strAlbumThumb
+    yearReleased.innerText = oneAlbum.intYearReleased
+    theLabel.innerText = oneAlbum.strLabel
+    albumSales = oneAlbum.intSales
+    albumDescription = oneAlbum.strDescriptionEN
+
+
+    singleAlbumDisplay.appendChild(albumName)
+    singleAlbumDisplay.appendChild(singleAlbumArt)
+    singleAlbumDisplay.appendChild(yearReleased)
+    singleAlbumDisplay.appendChild(theLabel)
+    // singleAlbumDisplay.appendChild(albumSales)
+    // singleAlbumDisplay.appendChild(albumDescription)
+    boxTwo.appendChild(singleAlbumDisplay)
+    console.log(oneAlbum)
+    console.log(albumName)
+
+}
+
+//Listen for enter key on search bar--> find the artist and get their albums
 searchBar.addEventListener('keydown', function(searchEvent) {
     if (searchEvent.keyCode == 13) {
         searchEvent.preventDefault()
@@ -139,3 +179,12 @@ searchBar.addEventListener('keydown', function(searchEvent) {
     }
   })
 
+  boxTwo.addEventListener('click', (event) => {
+      let selectAlbum = 'nevermind'
+    
+      getOneAlbum(selectAlbum)
+  })
+
+// window.onload = function(){
+//     getOneAlbum()
+// }

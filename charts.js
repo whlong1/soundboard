@@ -1,7 +1,4 @@
-//itunes album charts
-
-console.log('hello')
-
+// itunes album charts
 
 const ITUNES_ALBUM_CHARTS= 'https://theaudiodb.com/api/v1/json/523532/trending.php?country=us&type=itunes&format=albums'
 
@@ -37,7 +34,7 @@ const getChart = async () => {
     }
 }
 
-
-
 window.onload = getChart
+
+
 
