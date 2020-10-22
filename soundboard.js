@@ -70,7 +70,6 @@ const compareAlbums = (a, b) => {
 }
 
 const getAlbums = async (inputText) => {
-
     try {
         const response = await axios.get(`https://theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${inputText}`)
         let discogs = response.data.album
@@ -90,14 +89,20 @@ const populateAlbums = (discogs) => {
     boxTwo.innerHTML= " "
     for (let i = 0; i< discogs.length; i++) {
         let coverArt = document.createElement('img')
+        // let discogTitle = document.createElement('h3')
         coverArt.classList.add("pic")
+        // discogTitle.classList.add("discogTitle")
+        // discogTitle.innerText = "Discography"
+
         // coverArt.src = discogs[i].strAlbumThumb
+
         if (discogs[i].strAlbumThumb === null || discogs[i].strAlbumThumb === "") {
             return
         } else {
             coverArt.src = discogs[i].strAlbumThumb
         }
         boxTwo.appendChild(coverArt)
+        // boxTwo.appendChild(discogTitle)
     }
 }
 
