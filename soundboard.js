@@ -5,6 +5,7 @@ let searchBar = document.querySelector(".search-bar")
 // let inputText= searchBar.innerHTML
 
 //Quickview Data
+let boxOne = document.querySelector(".boxOne")
 let profilePicture = document.querySelector("#artistPhoto")
 let artistName = document.querySelector("#artistName")
 let locationResult = document.querySelector("#location")
@@ -22,6 +23,7 @@ let albumArtDiv = document.querySelector(".albumBox")
 
 
 const quickView = (data) => {
+    boxOne.style.visibility = "visible"
     profilePicture.src = data.artists[0].strArtistThumb
     artistName.innerHTML = data.artists[0].strArtist
     locationResult.innerHTML = data.artists[0].strCountry
@@ -29,12 +31,11 @@ const quickView = (data) => {
     recordLabel.innerHTML = data.artists[0].strLabel
     musicGenre.innerHTML = data.artists[0].strGenre
     mood.innerHTML = data.artists[0].strMood
-
     artistBio.innerHTML = data.artists[0].strBiographyEN
 
-    web.innerHTML = data.artists[0].strWebsite
-    fb.innerHTML = data.artists[0].strFacebook
-    twitter.innerHTML = data.artists[0].strTwitter
+    // web.innerHTML = data.artists[0].strWebsite
+    // fb.innerHTML = data.artists[0].strFacebook
+    // twitter.innerHTML = data.artists[0].strTwitter
 }
 
 //toggle class tied to image in quickview
@@ -56,11 +57,27 @@ const goFind = (inputText) => {
 
 //======================================================================================
 
+const compareAlbums = (a, b) => {
+    const aYear = parseInt(a.intYearReleased)
+    const bYear = parseInt(b.intYearReleased)
+    let comparison = 0 
+    if (aYear > bYear){
+        comparison = 1
+    } else if (aYear < bYear) {
+        comparison = -1
+    }
+    return comparison
+}
+
 const getAlbums = async (inputText) => {
+
     try {
         const response = await axios.get(`https://theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${inputText}`)
         let discogs = response.data.album
-        // console.log(discogs)
+        // discogs.sort((a, b) => {
+        //     return a.intYearReleased - b.intYearReleased})
+        // discogs.sort(compareAlbums)
+        console.log(discogs)
         populateAlbums (discogs)
     } catch (error) {
         console.log(error)
@@ -74,19 +91,16 @@ const populateAlbums = (discogs) => {
     for (let i = 0; i< discogs.length; i++) {
         let coverArt = document.createElement('img')
         coverArt.classList.add("pic")
-        coverArt.id = discogs[i].strAlbum
         // coverArt.src = discogs[i].strAlbumThumb
-
-        boxTwo.appendChild(coverArt)
-        if (discogs[i].strAlbumThumb === null) {
+        if (discogs[i].strAlbumThumb === null || discogs[i].strAlbumThumb === "") {
             return
         } else {
             coverArt.src = discogs[i].strAlbumThumb
         }
+        boxTwo.appendChild(coverArt)
     }
 }
 
-// strAlbumThumb
 
 searchBar.addEventListener('keydown', function(searchEvent) {
     if (searchEvent.keyCode == 13) {

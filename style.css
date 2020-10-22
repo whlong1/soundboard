@@ -122,6 +122,7 @@ h3{
 }
 
 .boxOne{
+    visibility: hidden;
     position: relative;
     grid-area: boxOne;
     width: 385px;
@@ -344,7 +345,7 @@ h3{
 
 
 
-footer{
+/* footer{
     position: absolute;
     bottom: 0;
     background-color: black;
@@ -353,7 +354,7 @@ footer{
     margin: 0 auto;
     border: none;
     padding: none;
-}
+} */
 
 /* .footer-text{
     color: white;
