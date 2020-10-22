@@ -1,15 +1,14 @@
-// https://theaudiodb.com/api/v1/json/1/search.php?s=coldplay
+//soundboard
 
 let searchBar = document.querySelector(".search-bar")
 
-// let inputText= searchBar.innerHTML
-
-//Quickview Data
 let boxOne = document.querySelector(".boxOne")
-// boxOne.style.visibility = "hidden"
+let boxTwo = document.querySelector('.boxTwo')
+let singleAlbumDisplay = document.querySelector(".singleAlbumDisplay")
 
-// let displayCase = document.querySelector('.quickView')
-// displayCase.style.visibility = "hidden"
+//QUICKVIEW DATA
+
+//Leftside-Artist Details
 
 let profilePicture = document.querySelector("#artistPhoto")
 let artistName = document.querySelector("#artistName")
@@ -20,16 +19,22 @@ let musicGenre = document.querySelector("#genre")
 let mood = document.querySelector("#mood")
 let artistBio = document.querySelector("#bioText")
 
+//Rightside-Discography
+
+let albumArtDiv = document.querySelector(".albumBox")
+
+//Bottom-Social Media 
+
 let web = document.querySelector("#web")
 let fb = document.querySelector("#fb")
 let twitter = document.querySelector("#twitter")
 
-let albumArtDiv = document.querySelector(".albumBox")
-
+//Assigns data to variables
 
 const quickView = (data) => {
+    //default visibility of boxOne in css set as hidden
     boxOne.style.visibility = "visible"
-    // displayCase.style.visibility = "visible"
+    //Artist Details
     profilePicture.src = data.artists[0].strArtistThumb
     artistName.innerHTML = data.artists[0].strArtist
     locationResult.innerHTML = data.artists[0].strCountry
@@ -38,15 +43,13 @@ const quickView = (data) => {
     musicGenre.innerHTML = data.artists[0].strGenre
     mood.innerHTML = data.artists[0].strMood
     artistBio.innerHTML = data.artists[0].strBiographyEN
-
+    //Social Meddia
     web.innerHTML = data.artists[0].strWebsite
     fb.innerHTML = data.artists[0].strFacebook
     twitter.innerHTML = data.artists[0].strTwitter
 }
 
-//search
-//on click expand
-//on click width= blank
+//Find data on an artist
 
 const goFind = (inputText) => {
     axios.get(`https://theaudiodb.com/api/v1/json/523532/search.php?s=${inputText}`)
@@ -56,6 +59,8 @@ const goFind = (inputText) => {
     })
     .catch(error => console.log('Error:', error))
 }
+
+//Compare release dates of albums
 
 const compareAlbums = (a, b) => {
     const aYear = parseInt(a.intYearReleased)
@@ -69,10 +74,14 @@ const compareAlbums = (a, b) => {
     return comparison
 }
 
+//Get discography from selected artist
+
 const getAlbums = async (inputText) => {
     try {
         const response = await axios.get(`https://theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${inputText}`)
         let discogs = response.data.album
+
+        //Sort albums chronologically
 
         discogs.sort((a, b) => {
             return a.intYearReleased - b.intYearReleased})
@@ -85,13 +94,13 @@ const getAlbums = async (inputText) => {
     }
 }
 
-
-
-
-let boxTwo = document.querySelector('.boxTwo')
+//Display returned album art
 
 const populateAlbums = (discogs) => {
+    //clear container each time to prevent overlap
     boxTwo.innerHTML= ""
+
+    //Creates Discography section title & album art images
 
     let discogTitle = document.createElement('p')
     discogTitle.classList.add("discogTitle")
@@ -101,26 +110,25 @@ const populateAlbums = (discogs) => {
     boxTwo.appendChild(discogTitle)
     boxTwo.appendChild(coverDiv)
 
+    //Creates an image for every album in discogs
+
     for (let i = 0; i< discogs.length; i++) {
         let coverArt = document.createElement('img')
-        // let discogTitle = document.createElement('h3')
         coverArt.classList.add("pic")
-        coverArt.id = discogs[i].idAlbum
-        // discogTitle.classList.add("discogTitle")
-        // discogTitle.innerText = "Discography"
+        coverArt.id = discogs[i].strAlbum
 
-        // coverArt.src = discogs[i].strAlbumThumb
+        //Blocks data with no album art (bootlegs etc)
 
         if (discogs[i].strAlbumThumb === null || discogs[i].strAlbumThumb === "") {
             continue
         } else {
             coverArt.src = discogs[i].strAlbumThumb
         }
-        // coverArt.src = discogs[i].strAlbumThumb
         coverDiv.appendChild(coverArt)
-        // boxTwo.appendChild(discogTitle)
     }
 }
+
+//Listen for enter key on search bar--> find the artist and get their albums
 
 searchBar.addEventListener('keydown', function(searchEvent) {
     if (searchEvent.keyCode == 13) {
@@ -128,7 +136,6 @@ searchBar.addEventListener('keydown', function(searchEvent) {
         let inputText = searchEvent.target.value
         goFind(inputText)
         getAlbums(inputText)
-
     }
   })
 

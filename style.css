@@ -51,7 +51,7 @@ nav{
 }
 
 .redOverlay{
-    color: red;
+    color: #F43A33;
 }
 
 
@@ -96,7 +96,7 @@ h3{
     border: none;
     outline: none;
     border-radius: 25px;
-    background-color: lightgrey;
+    background-color: #E8F0FE;
 }
 
 .btnSearch{
