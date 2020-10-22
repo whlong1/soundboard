@@ -6,6 +6,11 @@ let searchBar = document.querySelector(".search-bar")
 
 //Quickview Data
 let boxOne = document.querySelector(".boxOne")
+// boxOne.style.visibility = "hidden"
+
+// let displayCase = document.querySelector('.quickView')
+// displayCase.style.visibility = "hidden"
+
 let profilePicture = document.querySelector("#artistPhoto")
 let artistName = document.querySelector("#artistName")
 let locationResult = document.querySelector("#location")
@@ -24,6 +29,7 @@ let albumArtDiv = document.querySelector(".albumBox")
 
 const quickView = (data) => {
     boxOne.style.visibility = "visible"
+    // displayCase.style.visibility = "visible"
     profilePicture.src = data.artists[0].strArtistThumb
     artistName.innerHTML = data.artists[0].strArtist
     locationResult.innerHTML = data.artists[0].strCountry
