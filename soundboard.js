@@ -33,14 +33,10 @@ const quickView = (data) => {
     mood.innerHTML = data.artists[0].strMood
     artistBio.innerHTML = data.artists[0].strBiographyEN
 
-    // web.innerHTML = data.artists[0].strWebsite
-    // fb.innerHTML = data.artists[0].strFacebook
-    // twitter.innerHTML = data.artists[0].strTwitter
+    web.innerHTML = data.artists[0].strWebsite
+    fb.innerHTML = data.artists[0].strFacebook
+    twitter.innerHTML = data.artists[0].strTwitter
 }
-
-//toggle class tied to image in quickview
-//in css make class hidden
-//toggle to not hidden with event handler
 
 //search
 //on click expand
@@ -54,8 +50,6 @@ const goFind = (inputText) => {
     })
     .catch(error => console.log('Error:', error))
 }
-
-//======================================================================================
 
 const compareAlbums = (a, b) => {
     const aYear = parseInt(a.intYearReleased)
@@ -73,9 +67,11 @@ const getAlbums = async (inputText) => {
     try {
         const response = await axios.get(`https://theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${inputText}`)
         let discogs = response.data.album
+
         // discogs.sort((a, b) => {
         //     return a.intYearReleased - b.intYearReleased})
         // discogs.sort(compareAlbums)
+
         console.log(discogs)
         populateAlbums (discogs)
     } catch (error) {
@@ -83,14 +79,23 @@ const getAlbums = async (inputText) => {
     }
 }
 
+const makeDiscogTitle = () => {
+    let discogTitle = document.createElement('p')
+    discogTitle.classList.add("discogTitle")
+    discogTitle.innerText = "Discography"
+    boxTwo.appendChild(discogTitle)
+}
+
 let boxTwo = document.querySelector('.boxTwo')
 
 const populateAlbums = (discogs) => {
     boxTwo.innerHTML= " "
+    makeDiscogTitle()
     for (let i = 0; i< discogs.length; i++) {
         let coverArt = document.createElement('img')
         // let discogTitle = document.createElement('h3')
         coverArt.classList.add("pic")
+        coverArt.id = discogs[i]
         // discogTitle.classList.add("discogTitle")
         // discogTitle.innerText = "Discography"
 
@@ -105,7 +110,6 @@ const populateAlbums = (discogs) => {
         // boxTwo.appendChild(discogTitle)
     }
 }
-
 
 searchBar.addEventListener('keydown', function(searchEvent) {
     if (searchEvent.keyCode == 13) {

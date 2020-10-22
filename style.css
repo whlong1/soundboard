@@ -121,7 +121,7 @@ h3{
     border-width: 1px;
     border-color: #d3d3d3;
     border-radius: 10px;
-    padding: 20px;
+    /* padding: 20px; */
     margin: auto;
 }
 
@@ -131,7 +131,9 @@ h3{
     grid-area: boxOne;
     width: 385px;
     height: 382px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
+    padding: 20px;
+    padding-right: 10px;
     grid-template-areas:
         "rowOne rowTwo";
 }
@@ -241,7 +243,29 @@ h3{
 
 }
 
+.discogTitle{
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-family: 'canada-type-gibson', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 450;
+    line-height: 2;
+    text-align: left;
+    height: 12px;
+}
+
+
+
+.bottomBox{
+    padding-top: 1000px;
+    display: inline-block
+
+}
+
 .boxTwo{
+    padding: 20px;
+    padding-left: 10px;
     position: relative;
     grid-area: boxTwo;
     width: 385px;
@@ -251,16 +275,11 @@ h3{
         "rowThree rowFour";
 }
 
-
-.discogTitle{
-    margin: 10px;
-}
-
 .pic{
     border-style: solid;
     border-width: 1px;
     border-color: #d3d3d3;
-    border-radius: 2px;
+    border-radius: 3px;
     
     width: 100px;
     height: 100px;
