@@ -105,8 +105,12 @@ const populateAlbums = (discogs) => {
     boxTwo.appendChild(discogTitle)
     boxTwo.appendChild(coverDiv)
 
+
+    
+
+
     //Creates an image for every album in discogs
-    for (let i = 0; i< discogs.length; i++) {
+    for (let i = 0; i < discogs.length; i++) {
         let coverArt = document.createElement('img')
         coverArt.classList.add("pic")
         coverArt.id = discogs[i].strAlbum
@@ -117,7 +121,17 @@ const populateAlbums = (discogs) => {
         } else {
             coverArt.src = discogs[i].strAlbumThumb
         }
+        
         coverDiv.appendChild(coverArt)
+
+
+        document.querySelectorAll('.pic').forEach(pic => pic.addEventListener('click', event => {
+            pic.onClick = function() {
+                let selectAlbum = event.target.value
+                getOneAlbum(selectAlbum)
+            }
+            // console.log(coverArt.id)
+        }))
     }
 }
 
@@ -132,7 +146,7 @@ const getOneAlbum = async (selectAlbum) => {
         let oneAlbum = response.data.album[0]
         console.log(selectAlbum)
         console.log(oneAlbum)
-        populateSingleAlbum(oneAlbum)
+        // populateSingleAlbum(oneAlbum)
         console.log('TESTING')
     } catch (error) {
         console.log(error)
@@ -207,24 +221,30 @@ searchBar.addEventListener('keydown', function(searchEvent) {
 // }
 
 
-let allAlbums = document.querySelectorAll('.pic')
+// let allAlbums = document.querySelectorAll('.pic')
 
 
-allAlbums.addEventListener('click', (event) => {
-    selectAlbum = event.target.id
-    // coverDiv.style.visibility = 'hidden'
-    console.log(selectAlbum)
-    getOneAlbum(selectAlbum)
-})
+// allAlbums.addEventListener('click', (event) => {
+//     selectAlbum = event.target.id
+//     // coverDiv.style.visibility = 'hidden'
+//     console.log(selectAlbum)
+//     getOneAlbum(selectAlbum)
+// })
+
+document.querySelectorAll('.pic').forEach(pic => pic.addEventListener('click', event => {
+    getOneAlbum()
+    console.log(pic)
+}))
 
 
-// const banana = document.querySelectorAll(".pic");
-//  for (let i = 0; i < banana.length; i++) {
-//      banana[i].addEventListener("click", function() {
-//        // do something...
-//      });
-//  }
-
+// const banana = document.getElementsByClassName(".pic");
+//     for (let i = 0; i < banana.length; i++) {
+//         banana[i].addEventListener("click", function() {
+//             console.log('clicked')
+//             console.log(banana[i])
+//     });
+// }
+// getOneAlbum()
 
 // allAlbums.forEach((pic) => {
 //     pic.addEventListener('click', (event) => {
