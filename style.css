@@ -142,8 +142,6 @@ h3{
 
 }
 
-
-
 .footerSocial{
     border-radius: 0 0 10px 10px;
     padding: 5px 20px;
@@ -273,47 +271,38 @@ h3{
 
 .discogTitle{
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
+    margin-left: 9px;
     font-family: 'canada-type-gibson', sans-serif;
     font-style: normal;
-    font-size: 14px;
+    font-size: 14.5px;
     font-weight: 450;
     line-height: 2;
     text-align: left;
-    /* height: 12px; */
+    /* height: 20px; */
 }
 
-/* .coverDiv{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+.coverDiv{
+    margin-top: 5px;
+    padding-left: 6px;
 
-} */
+}
 
 .pic{
     border-style: solid;
     border-width: 1px;
     border-color: #d3d3d3;
     border-radius: 3px;
-    height: 100px;
     
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
 
     margin: 3px;
+    margin-top: 0px;
 }
 
 
 .singleAlbumDisplay{
-    /* grid-template-columns: [line1] 40px [line2] 40px [line3] 40px [line4] 50px; */
-
-
-
-
-
-
-
-
-
     color: black;
     font-family: 'canada-type-gibson', sans-serif;
     font-style: normal;
