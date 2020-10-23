@@ -134,12 +134,9 @@ const getOneAlbum = async (selectAlbum) => {
 const populateSingleAlbum = (oneAlbum) => {
     //Clear boxTwo of full discography to free space for single album view.
     boxTwo.innerHTML= ""
-    // boxTwo.style.visibility = "hidden"
-    // coverDiv.style.height = 0;
-
-
+ 
     //Back button
-    let backButton = document.createElement('button')
+    let backButton = document.createElement('h3')
     
     //Create container for information on one album
     let singleAlbumDisplay = document.createElement('div')
@@ -148,18 +145,29 @@ const populateSingleAlbum = (oneAlbum) => {
 
     //Album information
 
-    //Title+Art
+    //Title + Art
     let albumName = document.createElement('h3')
     let singleAlbumArt = document.createElement('img')
-
     let yearReleased = document.createElement('p')
     let theLabel = document.createElement('p')
     let albumDescription = document.createElement('p')
 
-    albumName.classList.add("albumTitle")
-    singleAlbumArt.classList.add("topPhoto")
-    albumDescription.id = "summary"
+
+    albumName.classList.add("aGroup")
+    // singleAlbumArt.classList.add("aGroup")
+
+    yearReleased.classList.add("aGroup")
+    theLabel.classList.add("aGroup")
+    backButton.classList.add("aGroup")
+
+
     backButton.id = "backButton"
+    albumName.id = "albumTitle"
+    singleAlbumArt.id = "topPhoto"
+    yearReleased.id = "yearReleased"
+    theLabel.id = "theLabel"
+    albumDescription.id = "summary"
+    
 
     albumName.innerText = oneAlbum.strAlbum
     singleAlbumArt.src = oneAlbum.strAlbumThumb
