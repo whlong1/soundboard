@@ -6,11 +6,6 @@ let boxOne = document.querySelector(".boxOne")
 let boxTwo = document.querySelector('.boxTwo')
 
 
-
-
-
-
-
 //QUICKVIEW DATA
 
 //Leftside-Artist Details
@@ -106,9 +101,6 @@ const populateAlbums = (discogs) => {
     boxTwo.appendChild(coverDiv)
 
 
-    
-
-
     //Creates an image for every album in discogs
     for (let i = 0; i < discogs.length; i++) {
         let coverArt = document.createElement('img')
@@ -121,19 +113,16 @@ const populateAlbums = (discogs) => {
         } else {
             coverArt.src = discogs[i].strAlbumThumb
         }
-        
         coverDiv.appendChild(coverArt)
-
-
-        document.querySelectorAll('.pic').forEach(pic => pic.addEventListener('click', event => {
-            pic.onClick = function() {
-                let selectAlbum = event.target.value
-                getOneAlbum(selectAlbum)
-            }
-            // console.log(coverArt.id)
-        }))
     }
+    document.querySelectorAll('.pic').forEach(pic => pic.addEventListener('click', event => {
+        let selectAlbum = event.target.id
+        console.log(selectAlbum)
+        getOneAlbum(selectAlbum)
+    }))
 }
+
+
 
 
 //=============================================================================
@@ -144,10 +133,10 @@ const getOneAlbum = async (selectAlbum) => {
         // const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=nevermind`)
         const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=${selectAlbum}`)
         let oneAlbum = response.data.album[0]
-        console.log(selectAlbum)
-        console.log(oneAlbum)
-        // populateSingleAlbum(oneAlbum)
-        console.log('TESTING')
+        // console.log(selectAlbum)
+        // console.log(oneAlbum)
+        populateSingleAlbum(oneAlbum)
+        // console.log('TESTING')
     } catch (error) {
         console.log(error)
     }
@@ -191,10 +180,6 @@ const populateSingleAlbum = (oneAlbum) => {
     singleAlbumDisplay.appendChild(albumSales)
     singleAlbumDisplay.appendChild(albumDescription)
     boxTwo.appendChild(singleAlbumDisplay)
-    console.log(oneAlbum)
-    console.log(albumName)
-    console.log(albumDescription)
-
 }
 
 //Listen for enter key on search bar--> find the artist and get their albums
@@ -207,59 +192,3 @@ searchBar.addEventListener('keydown', function(searchEvent) {
     }
   })
 
-//   let selectAlbum = discogs[i].strAlbum
-
-
-
-// pic.addEventListener('click', (event) => {
-//     selectAlbum = event.target.id
-//     getOneAlbum(selectAlbum)
-// })
-
-// window.onload = function(){
-//     getOneAlbum()
-// }
-
-
-// let allAlbums = document.querySelectorAll('.pic')
-
-
-// allAlbums.addEventListener('click', (event) => {
-//     selectAlbum = event.target.id
-//     // coverDiv.style.visibility = 'hidden'
-//     console.log(selectAlbum)
-//     getOneAlbum(selectAlbum)
-// })
-
-document.querySelectorAll('.pic').forEach(pic => pic.addEventListener('click', event => {
-    getOneAlbum()
-    console.log(pic)
-}))
-
-
-// const banana = document.getElementsByClassName(".pic");
-//     for (let i = 0; i < banana.length; i++) {
-//         banana[i].addEventListener("click", function() {
-//             console.log('clicked')
-//             console.log(banana[i])
-//     });
-// }
-// getOneAlbum()
-
-// allAlbums.forEach((pic) => {
-//     pic.addEventListener('click', (event) => {
-//         selectAlbum = event.target.id
-//         // coverDiv.style.visibility = 'hidden'
-//         console.log(selectAlbum)
-//         getOneAlbum(selectAlbum)
-//     })
-// })
-
-
-// coverArt.forEach((pic) => {
-//     pic.addEventListener('click', (event) => {
-//         selectAlbum = event.target.id
-//         getOneAlbum(selectAlbum)
-//     })
-// }
-// )
