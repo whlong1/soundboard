@@ -330,7 +330,7 @@ h3{
 
 
 .singleAlbumDisplay{
-    visibility: hidden;
+    /* visibility: hidden; */
     color: black;
 
     font-family: 'canada-type-gibson', sans-serif;

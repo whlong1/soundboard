@@ -77,9 +77,8 @@ const getAlbums = async (inputText) => {
         discogs.sort((a, b) => {
             return a.intYearReleased - b.intYearReleased})
         discogs.sort(compareAlbums)
-
-        // console.log(discogs)
         populateAlbums (discogs)
+
     } catch (error) {
         console.log(error)
     }
@@ -89,7 +88,7 @@ const getAlbums = async (inputText) => {
 const populateAlbums = (discogs) => {
     //clear container each time to prevent overlap
     boxTwo.innerHTML= ""
-
+    
     //Creates Discography section title & album art images
     let discogTitle = document.createElement('p')
     discogTitle.classList.add("discogTitle")
@@ -98,7 +97,6 @@ const populateAlbums = (discogs) => {
     coverDiv.classList.add("coverDiv")
     boxTwo.appendChild(discogTitle)
     boxTwo.appendChild(coverDiv)
-
 
     //Creates an image for every album in discogs
     for (let i = 0; i < discogs.length; i++) {
@@ -125,13 +123,9 @@ const populateAlbums = (discogs) => {
 // SINGLE ALBUM DISPLAY
 const getOneAlbum = async (selectAlbum) => {
     try {
-        // const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=nevermind`)
         const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=${selectAlbum}`)
         let oneAlbum = response.data.album[0]
-        // console.log(selectAlbum)
-        // console.log(oneAlbum)
         populateSingleAlbum(oneAlbum)
-        // console.log('TESTING')
     } catch (error) {
         console.log(error)
     }
@@ -140,6 +134,12 @@ const getOneAlbum = async (selectAlbum) => {
 const populateSingleAlbum = (oneAlbum) => {
     //Clear boxTwo of full discography to free space for single album view.
     boxTwo.innerHTML= ""
+    // boxTwo.style.visibility = "hidden"
+    // coverDiv.style.height = 0;
+
+
+    //Back button
+    let backButton = document.createElement('button')
     
     //Create container for information on one album
     let singleAlbumDisplay = document.createElement('div')
@@ -158,7 +158,8 @@ const populateSingleAlbum = (oneAlbum) => {
 
     albumName.classList.add("albumTitle")
     singleAlbumArt.classList.add("topPhoto")
-    albumDescription.id = 'summary'
+    albumDescription.id = "summary"
+    backButton.id = "backButton"
 
     albumName.innerText = oneAlbum.strAlbum
     singleAlbumArt.src = oneAlbum.strAlbumThumb
@@ -166,12 +167,24 @@ const populateSingleAlbum = (oneAlbum) => {
     theLabel.innerText = oneAlbum.strLabel
     albumDescription.innerText = oneAlbum.strDescriptionEN
 
+    backButton.innerText = "BACK"
+
+    singleAlbumDisplay.appendChild(backButton)
     singleAlbumDisplay.appendChild(albumName)
     singleAlbumDisplay.appendChild(singleAlbumArt)
     singleAlbumDisplay.appendChild(yearReleased)
     singleAlbumDisplay.appendChild(theLabel)
     singleAlbumDisplay.appendChild(albumDescription)
     boxTwo.appendChild(singleAlbumDisplay)
+
+    //BACK BUTTON EVENT LISTENER
+    backButton.addEventListener('click', function(event) {
+        let theWayBack = oneAlbum.strArtist
+        goFind(theWayBack)
+        getAlbums(theWayBack)
+
+    })
+    
 }
 
 //Listen for enter key on search bar--> find the artist and get their albums
@@ -182,5 +195,8 @@ searchBar.addEventListener('keydown', function(searchEvent) {
         goFind(inputText)
         getAlbums(inputText)
     }
-  })
+})
+
+
+
 
