@@ -5,7 +5,6 @@ let searchBar = document.querySelector(".search-bar")
 let boxOne = document.querySelector(".boxOne")
 let boxTwo = document.querySelector('.boxTwo')
 
-
 //QUICKVIEW DATA
 
 //Leftside-Artist Details
@@ -115,19 +114,15 @@ const populateAlbums = (discogs) => {
         }
         coverDiv.appendChild(coverArt)
     }
+    //Make every album art div clickable, and pass selected album through the getOneAlbum function
     document.querySelectorAll('.pic').forEach(pic => pic.addEventListener('click', event => {
         let selectAlbum = event.target.id
-        console.log(selectAlbum)
         getOneAlbum(selectAlbum)
     }))
 }
 
 
-
-
-//=============================================================================
 // SINGLE ALBUM DISPLAY
-
 const getOneAlbum = async (selectAlbum) => {
     try {
         // const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=nevermind`)
@@ -159,7 +154,6 @@ const populateSingleAlbum = (oneAlbum) => {
 
     let yearReleased = document.createElement('p')
     let theLabel = document.createElement('p')
-    let albumSales = document.createElement('p')
     let albumDescription = document.createElement('p')
 
     albumName.classList.add("albumTitle")
@@ -170,14 +164,12 @@ const populateSingleAlbum = (oneAlbum) => {
     singleAlbumArt.src = oneAlbum.strAlbumThumb
     yearReleased.innerText = oneAlbum.intYearReleased
     theLabel.innerText = oneAlbum.strLabel
-    albumSales.innerText = oneAlbum.intSales
     albumDescription.innerText = oneAlbum.strDescriptionEN
 
     singleAlbumDisplay.appendChild(albumName)
     singleAlbumDisplay.appendChild(singleAlbumArt)
     singleAlbumDisplay.appendChild(yearReleased)
     singleAlbumDisplay.appendChild(theLabel)
-    singleAlbumDisplay.appendChild(albumSales)
     singleAlbumDisplay.appendChild(albumDescription)
     boxTwo.appendChild(singleAlbumDisplay)
 }
