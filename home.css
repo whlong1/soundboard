@@ -1,17 +1,11 @@
-@font-face { font-family: roboto-regular; 
-    src: url('https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet'); 
-  }
-/* *{
-    border: 2px dashed red;
-} */
+/* homePageStyleSheet */
+
 body{
-    min-width: 600px;
     display: grid;
-    /* grid-template-rows: auto; */
-    /* grid-template-columns: 2; */
+    min-width: 600px;
+    margin: 0;
     justify-items: center;
     align-items: center;
-    margin: 0;
     font-family: 'canada-type-gibson', sans-serif;
     text-align: center;
     color: black;
@@ -21,12 +15,9 @@ header{
     border-bottom: 1px solid lightgrey;
     width: 100vw;
     padding: 0;
-    /* background-color: black;
-    color: white; */
 }
 
 nav{
-
     width: 100%;
 }
 
@@ -37,14 +28,11 @@ nav{
     font-family: 'canada-type-gibson', sans-serif;
     font-style: normal;
     font-weight: 700;
-
     padding: 0 38vw;
-
 }
 
 .nav-links a{
     text-decoration: none;
-    /* color: white; */
     color: black;
 }
 
@@ -52,12 +40,12 @@ nav{
     color: #F43A33;
 }
 
-
 h1{
     font-family: 'canada-type-gibson', sans-serif;
     font-style: normal;
     font-weight: 700;
     text-align: center;
+    margin: 2vh;
 }
 
 h2{
@@ -73,10 +61,15 @@ h3{
     font-family: 'canada-type-gibson', sans-serif;
     font-style: normal;
     font-weight: 400;
+    font-size: 20px;
     text-align: center;
     background-color: white;
     color: black;
     width: 0 auto;
+}
+
+.container{
+    text-align: center;
 }
 
 #welcome{
@@ -85,4 +78,18 @@ h3{
     font-weight: 500;
 }
 
+p{
+    font-family: 'canada-type-gibson', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    color: #647183;
+}
+
+.boldBrand{
+    font-family: 'canada-type-gibson', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+}
 

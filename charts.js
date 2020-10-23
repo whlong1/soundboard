@@ -7,7 +7,8 @@ let chartBox = document.querySelector('.chartBox')
 const getChart = async () => {
     try {
         const response = await axios.get(ITUNES_ALBUM_CHARTS)
-        let trending = response.data.trending
+        //Reverses the order to display the top ranked album first
+        let trending = response.data.trending.reverse()
         for (let i = 0; i< trending.length; i++) {
 
             let boxGen = document.createElement('div')

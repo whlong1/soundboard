@@ -1,4 +1,4 @@
-//soundboard
+//soundboard artist page
 
 let searchBar = document.querySelector(".search-bar")
 
@@ -25,10 +25,12 @@ let web = document.querySelector("#web")
 let fb = document.querySelector("#fb")
 let twitter = document.querySelector("#twitter")
 
+
 //Assigns data to variables
 const quickView = (data) => {
     //default visibility of boxOne in css set as hidden
     boxOne.style.visibility = "visible"
+
     //Artist Details
     profilePicture.src = data.artists[0].strArtistThumb
     artistName.innerHTML = data.artists[0].strArtist
@@ -46,6 +48,9 @@ const quickView = (data) => {
 
 //Find data on an artist
 const goFind = (inputText) => {
+    let quickViewContainer = document.querySelector(".quickView")
+    quickViewContainer.style.visibility = "visible"
+
     axios.get(`https://theaudiodb.com/api/v1/json/523532/search.php?s=${inputText}`)
     .then(response =>{
         quickView(response.data)
@@ -78,7 +83,6 @@ const getAlbums = async (inputText) => {
             return a.intYearReleased - b.intYearReleased})
         discogs.sort(compareAlbums)
         populateAlbums (discogs)
-
     } catch (error) {
         console.log(error)
     }
@@ -88,6 +92,8 @@ const getAlbums = async (inputText) => {
 const populateAlbums = (discogs) => {
     //clear container each time to prevent overlap
     boxTwo.innerHTML= ""
+    let hiddenFooter = document.querySelector(".footerSocial")
+    hiddenFooter.style.visibility = "visible"
     
     //Creates Discography section title & album art images
     let discogTitle = document.createElement('p')
@@ -118,7 +124,6 @@ const populateAlbums = (discogs) => {
         getOneAlbum(selectAlbum)
     }))
 }
-
 
 // SINGLE ALBUM DISPLAY
 const getOneAlbum = async (selectAlbum) => {
@@ -152,14 +157,12 @@ const populateSingleAlbum = (oneAlbum) => {
     let theLabel = document.createElement('p')
     let albumDescription = document.createElement('p')
 
-
     albumName.classList.add("aGroup")
     // singleAlbumArt.classList.add("aGroup")
 
     yearReleased.classList.add("aGroup")
     theLabel.classList.add("aGroup")
     backButton.classList.add("aGroup")
-
 
     backButton.id = "backButton"
     albumName.id = "albumTitle"
@@ -168,7 +171,6 @@ const populateSingleAlbum = (oneAlbum) => {
     theLabel.id = "theLabel"
     albumDescription.id = "summary"
     
-
     albumName.innerText = oneAlbum.strAlbum
     singleAlbumArt.src = oneAlbum.strAlbumThumb
     yearReleased.innerText = oneAlbum.intYearReleased
@@ -190,9 +192,7 @@ const populateSingleAlbum = (oneAlbum) => {
         let theWayBack = oneAlbum.strArtist
         goFind(theWayBack)
         getAlbums(theWayBack)
-
     })
-    
 }
 
 //Listen for enter key on search bar--> find the artist and get their albums
