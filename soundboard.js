@@ -36,7 +36,7 @@ const quickView = (data) => {
     artistName.innerHTML = data.artists[0].strArtist
     locationResult.innerHTML = data.artists[0].strCountry
     startDate.innerHTML = data.artists[0].intFormedYear
-    recordLabel.innerHTML = data.artists[0].strLabel
+    // recordLabel.innerHTML = data.artists[0].strLabel
     musicGenre.innerHTML = data.artists[0].strGenre
     mood.innerHTML = data.artists[0].strMood
     artistBio.innerHTML = data.artists[0].strBiographyEN
@@ -44,6 +44,14 @@ const quickView = (data) => {
     web.innerHTML = data.artists[0].strWebsite
     fb.innerHTML = data.artists[0].strFacebook
     twitter.innerHTML = data.artists[0].strTwitter
+
+    //API is often missing Label information, text reads not available if label name is not provided. 
+
+    if (data.artists[0].strLabel === null) {
+        recordLabel.innerHTML = 'Not Available'
+    } else {
+        recordLabel.innerHTML = data.artists[0].strLabel
+    }
 }
 
 //Find data on an artist
@@ -130,7 +138,11 @@ const getOneAlbum = async (selectAlbum) => {
     try {
         const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?a=${selectAlbum}`)
         let oneAlbum = response.data.album[0]
+        //To get the album's tracklist, we need to use a different endpoint
+        let albumID = response.data.album[0].idAlbum
         populateSingleAlbum(oneAlbum)
+        // GET THE TRACKLIST
+        getAlbumTracks(albumID)
     } catch (error) {
         console.log(error)
     }
@@ -156,13 +168,13 @@ const populateSingleAlbum = (oneAlbum) => {
     let yearReleased = document.createElement('p')
     let theLabel = document.createElement('p')
     let albumDescription = document.createElement('p')
+    let trackSectionTitle = document.createElement('p')
 
     albumName.classList.add("aGroup")
-    // singleAlbumArt.classList.add("aGroup")
-
     yearReleased.classList.add("aGroup")
     theLabel.classList.add("aGroup")
     backButton.classList.add("aGroup")
+    trackSectionTitle.classList.add("aGroup")
 
     backButton.id = "backButton"
     albumName.id = "albumTitle"
@@ -170,13 +182,21 @@ const populateSingleAlbum = (oneAlbum) => {
     yearReleased.id = "yearReleased"
     theLabel.id = "theLabel"
     albumDescription.id = "summary"
+    trackSectionTitle.id = "trackSectionTitle"
     
     albumName.innerText = oneAlbum.strAlbum
     singleAlbumArt.src = oneAlbum.strAlbumThumb
     yearReleased.innerText = oneAlbum.intYearReleased
     theLabel.innerText = oneAlbum.strLabel
-    albumDescription.innerText = oneAlbum.strDescriptionEN
+    
+    //If album description is missing, leave that section blank.
+    if (oneAlbum.strDescription === null) {
+        albumDescription.innerText = ""
+    } else {
+        albumDescription.innerText = oneAlbum.strDescriptionEN
+    }
 
+    trackSectionTitle.innerText = "Tracklist"
     backButton.innerText = "BACK"
 
     singleAlbumDisplay.appendChild(backButton)
@@ -185,6 +205,7 @@ const populateSingleAlbum = (oneAlbum) => {
     singleAlbumDisplay.appendChild(yearReleased)
     singleAlbumDisplay.appendChild(theLabel)
     singleAlbumDisplay.appendChild(albumDescription)
+    singleAlbumDisplay.appendChild(trackSectionTitle)
     boxTwo.appendChild(singleAlbumDisplay)
 
     //BACK BUTTON EVENT LISTENER
@@ -193,6 +214,28 @@ const populateSingleAlbum = (oneAlbum) => {
         goFind(theWayBack)
         getAlbums(theWayBack)
     })
+}
+
+
+const getAlbumTracks = async (albumID) => {
+    try {
+        //This will make a search by the idAlbum returned in the getOneAlbum function.
+        const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/track.php?m=${albumID}`)
+        let trackList = response.data.track
+        //Created an Ordered List
+        let theTracks = document.createElement('ol')
+        theTracks.classList.add("theTracks")
+        //Creates a list item for every track in the array.
+        for (let i = 0; i < trackList.length; i++) {
+            let aTrack = document.createElement('li')
+            aTrack.classList.add("trackGroup")
+            aTrack.innerText = trackList[i].strTrack
+            theTracks.appendChild(aTrack)
+        }
+        boxTwo.appendChild(theTracks)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 //Listen for enter key on search bar--> find the artist and get their albums
@@ -204,7 +247,3 @@ searchBar.addEventListener('keydown', function(searchEvent) {
         getAlbums(inputText)
     }
 })
-
-
-
-

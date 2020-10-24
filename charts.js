@@ -29,7 +29,6 @@ const getChart = async () => {
             chartBox.appendChild(boxGen)
 
         }
-        console.log(response.data.trending)
     } catch (error) {
         console.log(error)
     }

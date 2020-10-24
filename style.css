@@ -313,6 +313,22 @@ h3{
     justify-content: contain;
 }
 
+
+.theTracks{
+    padding-left: 25px;
+}
+
+.trackGroup{
+    color: black;
+    font-family: 'canada-type-gibson', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: left;
+    padding-left: 0;
+    margin: 3px;
+}
+
 .footerSocial{
     visibility: hidden;
     border-radius: 0 0 10px 10px;
