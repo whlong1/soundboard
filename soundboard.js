@@ -59,20 +59,20 @@ const goFind = (inputText) => {
     let quickViewContainer = document.querySelector(".quickView")
     quickViewContainer.style.visibility = "visible"
 
-    axios.get(`https://theaudiodb.com/api/v1/json/523532/search.php?s=${inputText}`)
-    .then(response =>{
-        quickView(response.data)
-        return response.data
-    })
-    .catch(error => console.log('Error:', error))
+    axios.get(`https://theaudiodb.com/api/v1/json/1/search.php?s=${inputText}`)
+        .then(response => {
+            quickView(response.data)
+            return response.data
+        })
+        .catch(error => console.log('Error:', error))
 }
 
 //Compare release dates of albums
 const compareAlbums = (a, b) => {
     const aYear = parseInt(a.intYearReleased)
     const bYear = parseInt(b.intYearReleased)
-    let comparison = 0 
-    if (aYear > bYear){
+    let comparison = 0
+    if (aYear > bYear) {
         comparison = 1
     } else if (aYear < bYear) {
         comparison = -1
@@ -83,14 +83,15 @@ const compareAlbums = (a, b) => {
 //Get discography from selected artist
 const getAlbums = async (inputText) => {
     try {
-        const response = await axios.get(`https://theaudiodb.com/api/v1/json/523532/searchalbum.php?s=${inputText}`)
+        const response = await axios.get(`https://theaudiodb.com/api/v1/json/1/searchalbum.php?s=${inputText}`)
         let discogs = response.data.album
 
         //Sort albums chronologically
         discogs.sort((a, b) => {
-            return a.intYearReleased - b.intYearReleased})
+            return a.intYearReleased - b.intYearReleased
+        })
         discogs.sort(compareAlbums)
-        populateAlbums (discogs)
+        populateAlbums(discogs)
     } catch (error) {
         console.log(error)
     }
@@ -99,10 +100,10 @@ const getAlbums = async (inputText) => {
 //Display returned album art
 const populateAlbums = (discogs) => {
     //clear container each time to prevent overlap
-    boxTwo.innerHTML= ""
+    boxTwo.innerHTML = ""
     let hiddenFooter = document.querySelector(".footerSocial")
     hiddenFooter.style.visibility = "visible"
-    
+
     //Creates Discography section title & album art images
     let discogTitle = document.createElement('p')
     discogTitle.classList.add("discogTitle")
@@ -150,11 +151,11 @@ const getOneAlbum = async (selectAlbum) => {
 
 const populateSingleAlbum = (oneAlbum) => {
     //Clear boxTwo of full discography to free space for single album view.
-    boxTwo.innerHTML= ""
- 
+    boxTwo.innerHTML = ""
+
     //Back button
     let backButton = document.createElement('h3')
-    
+
     //Create container for information on one album
     let singleAlbumDisplay = document.createElement('div')
     singleAlbumDisplay.classList.add("singleAlbumDisplay")
@@ -183,12 +184,12 @@ const populateSingleAlbum = (oneAlbum) => {
     theLabel.id = "theLabel"
     albumDescription.id = "summary"
     trackSectionTitle.id = "trackSectionTitle"
-    
+
     albumName.innerText = oneAlbum.strAlbum
     singleAlbumArt.src = oneAlbum.strAlbumThumb
     yearReleased.innerText = oneAlbum.intYearReleased
     theLabel.innerText = oneAlbum.strLabel
-    
+
     //If album description is missing, leave that section blank.
     if (oneAlbum.strDescription === null) {
         albumDescription.innerText = ""
@@ -209,7 +210,7 @@ const populateSingleAlbum = (oneAlbum) => {
     boxTwo.appendChild(singleAlbumDisplay)
 
     //BACK BUTTON EVENT LISTENER
-    backButton.addEventListener('click', function(event) {
+    backButton.addEventListener('click', function (event) {
         let theWayBack = oneAlbum.strArtist
         goFind(theWayBack)
         getAlbums(theWayBack)
@@ -239,7 +240,7 @@ const getAlbumTracks = async (albumID) => {
 }
 
 //Listen for enter key on search bar--> find the artist and get their albums
-searchBar.addEventListener('keydown', function(searchEvent) {
+searchBar.addEventListener('keydown', function (searchEvent) {
     if (searchEvent.keyCode == 13) {
         searchEvent.preventDefault()
         let inputText = searchEvent.target.value

@@ -1,6 +1,6 @@
 // itunes album charts
 
-const ITUNES_ALBUM_CHARTS= 'https://theaudiodb.com/api/v1/json/523532/trending.php?country=us&type=itunes&format=albums'
+const ITUNES_ALBUM_CHARTS = 'https://theaudiodb.com/api/v1/json/1/trending.php?country=us&type=itunes&format=albums'
 
 let chartBox = document.querySelector('.chartBox')
 
@@ -9,7 +9,7 @@ const getChart = async () => {
         const response = await axios.get(ITUNES_ALBUM_CHARTS)
         //Reverses the order to display the top ranked album first
         let trending = response.data.trending.reverse()
-        for (let i = 0; i< trending.length; i++) {
+        for (let i = 0; i < trending.length; i++) {
 
             let boxGen = document.createElement('div')
             boxGen.classList.add("frame")
@@ -22,7 +22,7 @@ const getChart = async () => {
             albumTitle.innerText = trending[i].strAlbum
             artistName.innerText = trending[i].strArtist
             albumArt.src = trending[i].strAlbumThumb
-            
+
             boxGen.appendChild(albumTitle)
             boxGen.appendChild(albumArt)
             boxGen.appendChild(artistName)
