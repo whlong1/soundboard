@@ -4,10 +4,6 @@
 
 **soundboard** is an online repository of music information. **soundboard** utilizes the **TheAudioDB API** to organize information on recording artists in a user-friendly interface. With **soundboard**, users can find an artist's biography, full discography, and even information on individual albums. **soundboard** also provides users with an up to date list of the top trending albums on iTunes. 
 
-**Website:**
-
-https://whlong1.github.io/soundboard/
-
 ## **Mockups**
 
 Below is a mockup of the site's "Find an Artist" feature. My goal here was to keep the user's focus on the content, with an unobtrusive and versatile design. Rendering a predefined layout also represents a unique challenge in terms of CSS. 
